@@ -42,4 +42,25 @@ public class GameBoard {
 	}
 	
 	
+	private Chip parser(Chip chip, int xidx, int yidx){
+       int x = chip.row + xidx;
+       int y = chip.column+yidx;
+       Chip connectedChip = new Chip();
+       while(x<8 && x>-1 && y<8 && y>-1){
+           
+           if(board[x][y]==chip.color){
+               connectedChip.row = x;
+               connectedChip.column = y;
+               connectedChip.color = chip.color;
+               break;
+           }
+           else if(board[x][y]!= chip.color && board[x][y] != -1)
+               break;
+           
+           x +=xidx;
+           y +=yidx;
+       }
+       return connectedChip;
+   }
+	
 }
