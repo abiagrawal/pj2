@@ -30,14 +30,14 @@ public class GameBoard {
 	 */
 	public boolean update(Move m, int color){
 		if (m.moveKind == Move.ADD){
-	    	board[m.x1][m.y1] = color;
-	    	return true;	
+	    		board[m.x1][m.y1] = color;
+	    		return true;	
 		}
-	    if (m.moveKind == Move.STEP){
-	    	board[m.x1][m.y1] = board[m.x2][m.y2];
-	    	board[m.x2][m.y2] = EMPTY;
-	    	return true;	
-	    }
+    		if (m.moveKind == Move.STEP){
+    			board[m.x1][m.y1] = board[m.x2][m.y2];
+    			board[m.x2][m.y2] = EMPTY;
+    			return true;	
+    		}
 		return false;
 	}
 	
