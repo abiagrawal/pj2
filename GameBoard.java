@@ -228,3 +228,79 @@ public class GameBoard {
     }
 	
 }
+
+public DList listofValidMoves(int color){
+  DList listofmoves = new DList();
+  for (int x = 0, x<7, x++){
+    for (int y = 0, y<7, y++){
+      if (isValidMove(x, y, color)){
+        int [] list = new int[2];
+        list[0] = x;
+        list[1] = y;
+        listofmoves.insertback(list);
+      }
+    }
+  }
+  return listofmoves;
+}
+
+public boolean isValidMove(int x, int y, int color){
+  int [][] neighbors=neighbor(x,y);
+  if (x==0 && y==0 || x==7 && y==0 || x==0 && y==7 || x==7 && y==7){
+    return false;
+  }else if (getColor(x,y) !== -1){
+    return false;
+  }else if (color == 1 && (x==0 || x==7)){
+    return false;
+  }else if (color == 0 && (y==0 || y==7)){
+    return false;
+  }else
+    return checkNeighbors(x,y,color);
+}
+
+public boolean checkNeighbors (int x, int y, int color){
+  DList neighbors  = neighbor(x,y)
+  int numberofsamecolors = 0;
+  while (neighbors.node.next !== null){
+    int [] vals = node.item;
+    if (vals[0] == color){
+      numberofsamecolors++;
+      if (numberofsamecolors>1){
+        return false;
+      }
+      DList otherneighbors = neighbors(vals[1], vals[2]);
+      if (otherneighbors.length() > 1){
+        return false;
+      }
+    }
+    neighbors.node = neighbors.node.next;
+  }
+  return true;
+}
+
+private boolean inBound(int x, int y){
+    return (x>=0 && x<=7 && y>=0 && y<=7);
+  }
+
+public int getColor(int x, int y) {
+      return board[x][y];
+    }
+//CHECK FOR X AND Y TO MAKE SURE THEY ARE THE SAME
+
+public DList neighbor(int x, int y){
+  DList neighbors = new DList()
+  for (int offsetX = -1; offsetX<= 1, offsetX){
+    for (int offsetY = -1, offsetY <= 1, offsetY++){
+      if (!(offsetX == 0 && offsetY == 0)){
+        if (inbounds(x+ offsetX, y + offsetY)){
+          int [] vals = new int[3];
+          vals[0] = getColor(x+offsetX, y+offsetY);
+          vals[1] = x+offsetX;
+          vals[2] = y+offsetY;
+          neighbors.insertback(vals);
+        }
+      }
+    }
+  }
+  return neighbors;
+}
